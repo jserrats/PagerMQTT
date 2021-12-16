@@ -1,5 +1,5 @@
-//#include "secrets_juliet.h"
-#include "secrets_sierra.h"
+#include "secrets_juliet.h"
+//#include "secrets_sierra.h"
 #include <WiFiClientSecure.h>
 #include <MQTTClient.h>
 #include <ArduinoJson.h>
@@ -184,16 +184,21 @@ void loop()
     delay(400);
     if (digitalRead(PIN_BUTTON) == HIGH)
     {
-      //long press
+      // long press
       publish("buzz");
     }
     else
     {
-      //short press
+      // short press
       publish("chord");
     }
     short_buzz();
     short_led();
+
+    while (digitalRead(PIN_BUTTON) != LOW)
+    {
+      delay(50);
+    }
   }
   //
   client.loop();
